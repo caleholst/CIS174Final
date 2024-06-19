@@ -31,6 +31,13 @@
             <tr>
                 <td colspan="2">@book.Description</td>
             </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Edit</a>
+                    |
+                    <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Delete</a>
+                </td>
+            </tr>
         </tbody>
     </table>
 }
