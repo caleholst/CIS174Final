@@ -1,46 +1,13 @@
-﻿ @model List<Book>
+﻿@model List<Book>
 @{
     ViewData["Title"] = "Books";
 }
 
-<div class="mb-2">
-    <a asp-controller="Book" asp-action="Add">Add New Book </a>
-</div>
+<h1> Welcome To Filler Name </h1>
 
-@foreach (var book in Model)
-{
-    <table class="table table-bordered table-striped mb-4">
-        <tbody>
-            <tr>
-                <th>Title</th>
-                <td>@book.Title</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>@book.Author</td>
-            </tr>
-            <tr>
-                <th>Publish Year</th>
-                <td>@book.PublishYear</td>
-            </tr>
-            <tr>
-                <th>Rating</th>
-                <td>@book.Rating</td>
-            </tr>
-            <tr>
-                <th>Description:</th>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="2">@book.Description</td>
-            </tr>
-            <tr>
-                <td colspan="2" class="text-center">
-                    <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Edit</a>
-                    |
-                    <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Delete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-}
+<div class="mb-2">
+    <a asp-controller="Book" asp-action="Add" class="btn btn-primary btn-lg btn-block">Add New Book</a>
+</div>
+<div class="mb-2">
+    <a asp-controller="Home" asp-action="Books" class="btn btn-secondary btn-lg btn-block">View Books</a>
+</div>

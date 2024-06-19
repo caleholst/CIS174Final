@@ -16,4 +16,9 @@ public class HomeController : Controller
         return View(books);
     }
 
+    public IActionResult Books()
+    {
+        var books = context.Books.ToList();
+        return View(books);
+    }
 }
