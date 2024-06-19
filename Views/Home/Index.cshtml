@@ -7,31 +7,40 @@
     <a asp-controller="Book" asp-action="Add">Add New Book </a>
 </div>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>PublishYear</th>
-            <th>Rating</th>
-            <th>Description</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var book in Model)
-        {
+@foreach (var book in Model)
+{
+    <table class="table table-bordered table-striped mb-4">
+        <tbody>
             <tr>
+                <th>Title</th>
                 <td>@book.Title</td>
+            </tr>
+            <tr>
+                <th>Author</th>
                 <td>@book.Author</td>
+            </tr>
+            <tr>
+                <th>Publish Year</th>
                 <td>@book.PublishYear</td>
+            </tr>
+            <tr>
+                <th>Rating</th>
                 <td>@book.Rating</td>
-                <td>@book.Description</td>
-                <td>
+            </tr>
+            <tr>
+                <th>Description:</th>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">@book.Description</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
                     <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Edit</a>
+                    |
                     <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Delete</a>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}
