@@ -1,0 +1,24 @@
+﻿Final Requirements:
+
+Multipage web application including a navigation menu. - DONE 
+
+Connecting to a backend database with examples of Create, Read, Update, and Deletes - DONE 
+
+Create proper controllers without including all your business logic in there (logic should be in service classes)
+
+Properly formed Razor views with tag helpers and partial views
+
+Properly use session state 
+
+Always validate user input 
+
+Use dependency injection in order to make your code modular and testable
+
+Unit test all your business logic in your service classes
+
+User authentication (sign in)
+
+User Authorization (allowing certain access to certain people or roles)
+
+Web API for access for third party applications (postman, games, and/or mobile applications
+
