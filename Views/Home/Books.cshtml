@@ -1,9 +1,18 @@
-﻿@model List<Book>
+﻿@model List<CIS174Final.Models.Book>
 @{
     ViewData["Title"] = "Books";
 }
 
-
+<div class="dropdown mb-4 w-100">
+    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Sort Books
+    </button>
+    <ul class="dropdown-menu w-100 text-center" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" asp-controller="Book" asp-action="Books" asp-route-sortOrder="newest">Most Recent</a></li>
+        <li><a class="dropdown-item" asp-controller="Book" asp-action="Books" asp-route-sortOrder="oldest">Oldest</a></li>
+        <li><a class="dropdown-item" asp-controller="Book" asp-action="Books" asp-route-sortOrder="highest">Highest Reviewed</a></li>
+    </ul>
+</div>
 @foreach (var book in Model)
 {
     <table class="table table-bordered table-striped mb-4">
@@ -26,10 +35,12 @@
             </tr>
             <tr>
                 <th>Description:</th>
-                <td></td>
+                <td>@book.Description</td>
             </tr>
             <tr>
-                <td colspan="2">@book.Description</td>
+                <td colspan="2" class="text-center">
+                    <a asp-controller="Book" asp-action="Review" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Review Book Rating</a>
+                </td>
             </tr>
         </tbody>
     </table>

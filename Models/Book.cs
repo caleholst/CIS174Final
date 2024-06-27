@@ -10,5 +10,15 @@
         public string Description { get; set; }
 
         public string Slug => Title?.Replace(' ', '-').ToLower() + '-' + Author?.ToString();
+
+        public ICollection<Review> Reviews { get; set; }
+    }
+
+    public class Review
+    {
+        public int ReviewId { get; set; }
+        public int Rating { get; set; }
+
+        public Book Book { get; set; }
     }
 }

@@ -1,0 +1,24 @@
+﻿@model CIS174Final.Models.Book
+
+@{
+    ViewData["Title"] = "Review Book";
+}
+
+<h2>Enter a Review Between 1 and 5 for @Model.Title</h2>
+
+<form asp-action="Review" method="post">
+    <input type="hidden" asp-for="BookId" />
+
+    <div class="form-group">
+        <label for="Rating">Rating:</label>
+        <input type="number" class="form-control" id="Rating" name="Rating" min="1" max="5" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Review</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>
+
+@if (ViewBag.AverageRating != null)
+{
+    <h4>Average Rating: @ViewBag.AverageRating.ToString("0.0")</h4>
+}
