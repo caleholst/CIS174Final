@@ -116,7 +116,7 @@ public class BookController : Controller
                 break;
         }
 
-        var books = booksQuery.ToList(); 
+        var books = booksQuery.ToList();  //
 
         return View("~/Views/Home/Books.cshtml", books);
     }
