@@ -121,6 +121,3 @@ public class BookController : Controller
         return View("~/Views/Home/Books.cshtml", books);
     }
 }
-
-
-

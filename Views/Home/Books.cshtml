@@ -39,7 +39,17 @@
             </tr>
             <tr>
                 <td colspan="2" class="text-center">
-                    <a asp-controller="Book" asp-action="Review" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Review Book Rating</a>
+                    <div class="d-flex justify-content-center">
+                        <div class="w-50">
+                            <a asp-controller="Book" asp-action="Review" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Review Book Rating</a>
+                        </div>
+                        <div class="w-50">
+                            <form asp-controller="Favorites" asp-action="Add" method="post">
+                                <input type="hidden" name="id" value="@book.BookId" />
+                                <button type="submit" class="btn btn-primary">Add to Favorites</button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </tbody>

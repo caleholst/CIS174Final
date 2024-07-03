@@ -1,0 +1,49 @@
+﻿@model List<CIS174Final.Models.Book>
+
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+<h2>Favorites</h2>
+
+@if (!Model.Any())
+{
+    <p>No favorites added.</p>
+}
+else
+{
+    <div class="mb-4">
+        @foreach (var book in Model)
+        {
+            <table class="table table-bordered table-striped mb-4">
+                <tbody>
+                    <tr>
+                        <th>Title</th>
+                        <td>@book.Title</td>
+                    </tr>
+                    <tr>
+                        <th>Author</th>
+                        <td>@book.Author</td>
+                    </tr>
+                    <tr>
+                        <th>Publish Year</th>
+                        <td>@book.PublishYear</td>
+                    </tr>
+                    <tr>
+                        <th>Rating</th>
+                        <td>@book.Rating</td>
+                    </tr>
+                    <tr>
+                        <th>Description:</th>
+                        <td>@book.Description</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+}
+
+<a asp-action="Index" asp-controller="Home">Return to Home Page</a>
+<form asp-action="Remove" asp-controller="Favorites" method="post">
+    <button type="submit">Clear Favorites</button>
+</form>
