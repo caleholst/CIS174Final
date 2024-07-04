@@ -13,7 +13,7 @@ namespace CIS174Final.Models
 
         [Required(ErrorMessage = "Author is required")]
         [StringLength(50, ErrorMessage = "Author can't be longer than 50 characters")]
-        [RegularExpression(@"^[a-zA-Z\-\""]+$", ErrorMessage = "Author can only contain letters, hyphen, double quote, and single quote")]
+        [RegularExpression(@"^[a-zA-Z\-'""]+( [a-zA-Z\-'""]+)*$", ErrorMessage = "Author can only contain letters, hyphen, double quote, single quote, and spaces")]
         public string Author { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "Publish year must be after 0")]
