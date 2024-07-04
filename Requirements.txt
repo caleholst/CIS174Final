@@ -8,9 +8,9 @@ Create proper controllers without including all your business logic in there (lo
 
 Properly formed Razor views with tag helpers and partial views
 
-Properly use session state 
+Properly use session state - DONE 
 
-Always validate user input 
+Always validate user input - DONE 
 
 Use dependency injection in order to make your code modular and testable
 
