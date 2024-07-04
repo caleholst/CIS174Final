@@ -1,24 +1,29 @@
 ﻿Final Requirements:
 
-Multipage web application including a navigation menu. - DONE 
+(150 pts)Final project: Features, functionality, user experience, code style, and coding syntax. 
 
-Connecting to a backend database with examples of Create, Read, Update, and Deletes - DONE 
+(10) Proper routing techniques, route templates for website and attribute routing for web api. 
 
-Create proper controllers without including all your business logic in there (logic should be in service classes)
+(20) Using binding models and validating all user input in a logical manner to give the users a good experience and keep your application safe. - INPUT VALIDATION DONE
 
-Properly formed Razor views with tag helpers and partial views
+(10) Use tag helpers to create your forms in your web application for a nice user experience.
 
-Properly use session state - DONE 
+(20) Create and utilize a SQL Server database using at least one data context and entity framework core to access the database. Do all your database interactions in services. - DONE
+You should have examples of creates, reads, updates, and deletes - DONE
 
-Always validate user input - DONE 
+(10) Use MVC filters to clean up your code and remove code redundancy. You should not have repetitious code in the controllers/actions.
 
-Use dependency injection in order to make your code modular and testable
+(10) You should use user accounts, registration, login all using Identity.
 
-Unit test all your business logic in your service classes
+(10) You should use authorization to limit access to parts of your application for people that do not have access to them.
+You should also have Razor elements that are shown or hidden based on authorization.
 
-User authentication (sign in)
+(10) Create and utilize state management through Sessions or Cookies - DONE 
 
-User Authorization (allowing certain access to certain people or roles)
+(10) Create and utilize proper error handling techniques including having a custom error handling view - SOME
 
-Web API for access for third party applications (postman, games, and/or mobile applications
+(20)  Unit test your code. You should have tests around all your business logic so everything in your services and such should be tested.
+I am expecting 100% coverage on your business logic since your sites are relatively small applications.
+
+(20) Azure works - DONE 
 
