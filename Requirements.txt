@@ -20,7 +20,7 @@ You should also have Razor elements that are shown or hidden based on authorizat
 
 (10) Create and utilize state management through Sessions or Cookies - DONE 
 
-(10) Create and utilize proper error handling techniques including having a custom error handling view - SOME
+(10) Create and utilize proper error handling techniques including having a custom error handling view - DONE
 
 (20)  Unit test your code. You should have tests around all your business logic so everything in your services and such should be tested.
 I am expecting 100% coverage on your business logic since your sites are relatively small applications.

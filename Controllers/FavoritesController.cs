@@ -1,6 +1,7 @@
 ﻿using CIS174Final.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,74 +18,102 @@ namespace CIS174Final.Controllers
 
         public IActionResult Index()
         {
-            var favoriteIds = Request.Cookies["FavoriteBooks"];
-            if (favoriteIds == null)
+            try
             {
-                return View(new List<Book>());
+                var favoriteIds = Request.Cookies["FavoriteBooks"];
+                if (favoriteIds == null)
+                {
+                    return View(new List<Book>());
+                }
+
+                var ids = favoriteIds.Split(',').Select(int.Parse).ToList();
+
+                var favoriteBooks = context.Books
+                    .Where(b => ids.Contains(b.BookId))
+                    .ToList();
+
+                return View(favoriteBooks);
             }
-
-            var ids = favoriteIds.Split(',').Select(int.Parse).ToList();
-
-            var favoriteBooks = context.Books
-                .Where(b => ids.Contains(b.BookId))
-                .ToList();
-
-            return View(favoriteBooks);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
+            }
         }
 
         public IActionResult Add(int id)
         {
-            var favoriteIds = Request.Cookies["FavoriteBooks"];
-            List<int> ids;
-            if (favoriteIds == null)
+            try
             {
-                ids = new List<int>();
-            }
-            else
-            {
-                ids = favoriteIds.Split(',').Select(int.Parse).ToList();
-            }
+                var favoriteIds = Request.Cookies["FavoriteBooks"];
+                List<int> ids;
+                if (favoriteIds == null)
+                {
+                    ids = new List<int>();
+                }
+                else
+                {
+                    ids = favoriteIds.Split(',').Select(int.Parse).ToList();
+                }
 
-            if (!ids.Contains(id))
-            {
-                ids.Add(id);
-                Response.Cookies.Append("FavoriteBooks", string.Join(",", ids));
-            }
+                if (!ids.Contains(id))
+                {
+                    ids.Add(id);
+                    Response.Cookies.Append("FavoriteBooks", string.Join(",", ids));
+                }
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
+            }
         }
 
         public IActionResult Remove(int id)
         {
-            var favoriteIds = Request.Cookies["FavoriteBooks"];
-            if (favoriteIds == null)
+            try
             {
+                var favoriteIds = Request.Cookies["FavoriteBooks"];
+                if (favoriteIds == null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                var ids = favoriteIds.Split(',').Select(int.Parse).ToList();
+
+                if (ids.Contains(id))
+                {
+                    ids.Remove(id);
+                    if (ids.Any())
+                    {
+                        Response.Cookies.Append("FavoriteBooks", string.Join(",", ids));
+                    }
+                    else
+                    {
+                        Response.Cookies.Delete("FavoriteBooks");
+                    }
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-
-            var ids = favoriteIds.Split(',').Select(int.Parse).ToList();
-
-            if (ids.Contains(id))
+            catch (Exception ex)
             {
-                ids.Remove(id);
-                if (ids.Any())
-                {
-                    Response.Cookies.Append("FavoriteBooks", string.Join(",", ids));
-                }
-                else
-                {
-                    Response.Cookies.Delete("FavoriteBooks");
-                }
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
             }
-
-            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         public IActionResult Remove()
         {
-            Response.Cookies.Delete("FavoriteBooks");
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                Response.Cookies.Delete("FavoriteBooks");
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { message = ex.Message });
+            }
         }
     }
 }
