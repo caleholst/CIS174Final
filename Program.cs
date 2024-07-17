@@ -33,6 +33,24 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseSession();
 
+app.MapControllerRoute(
+    name: "book_add",
+    pattern: "api/book/add",
+    defaults: new { controller = "Book", action = "Add" }
+);
+
+app.MapControllerRoute(
+    name: "book_review",
+    pattern: "api/book/review/{id?}",
+    defaults: new { controller = "Book", action = "Review" }
+);
+
+app.MapControllerRoute(
+    name: "book_list",
+    pattern: "api/book/books",
+    defaults: new { controller = "Book", action = "Books" }
+);
+
 app.MapAreaControllerRoute(
     name: "admin",
     areaName: "Admin",

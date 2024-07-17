@@ -4,9 +4,9 @@
 
 (10) Proper routing techniques, route templates for website and attribute routing for web api. 
 
-(20) Using binding models and validating all user input in a logical manner to give the users a good experience and keep your application safe. - INPUT VALIDATION DONE
+(20) Using binding models and validating all user input in a logical manner to give the users a good experience and keep your application safe. - DONE
 
-(10) Use tag helpers to create your forms in your web application for a nice user experience.
+(10) Use tag helpers to create your forms in your web application for a nice user experience. - DONE
 
 (20) Create and utilize a SQL Server database using at least one data context and entity framework core to access the database. Do all your database interactions in services. - DONE
 You should have examples of creates, reads, updates, and deletes - DONE
