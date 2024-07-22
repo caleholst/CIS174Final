@@ -1,50 +1,35 @@
 using CIS174Final.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Diagnostics;
 
-namespace CIS174Final.Controllers;
-
-public class HomeController : Controller
+namespace CIS174Final.Controllers
 {
-    private BookContext context { get; set; }
-
-    public HomeController(BookContext ctx) => context = ctx;
-
-    public IActionResult Index()
+    public class HomeController : Controller
     {
-        try
+        private readonly BookContext context;
+
+        public HomeController(BookContext ctx) => context = ctx;
+
+        public IActionResult Index()
         {
             var books = context.Books.ToList();
             return View(books);
         }
-        catch (Exception ex)
-        {
-            return RedirectToAction("Error", new { message = ex.Message });
-        }
-    }
 
-    public IActionResult Books()
-    {
-        try
+        public IActionResult Books()
         {
             var books = context.Books.ToList();
             return View(books);
         }
-        catch (Exception ex)
-        {
-            return RedirectToAction("Error", new { message = ex.Message });
-        }
-    }
 
-    public IActionResult Error(string message)
-    {
-        var model = new ErrorViewModel
+        public IActionResult Error(string message)
         {
-            Message = message,
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-        };
-        return View(model);
+            var model = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(model);
+        }
     }
 }
