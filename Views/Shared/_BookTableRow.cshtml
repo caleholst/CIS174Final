@@ -1,0 +1,47 @@
+﻿@model CIS174Final.Models.Book
+
+<table class="table table-bordered table-striped mb-4">
+    <tbody>
+        <tr>
+            <th class="col-2">Title</th>
+            <td class="col-10">@Model.Title</td>
+        </tr>
+        <tr>
+            <th class="col-2">Author</th>
+            <td class="col-10">@Model.Author</td>
+        </tr>
+        <tr>
+            <th class="col-2">Publish Year</th>
+            <td class="col-10">@Model.PublishYear</td>
+        </tr>
+        <tr>
+            <th class="col-2">Rating</th>
+            <td class="col-10">@Model.Rating</td>
+        </tr>
+        <tr>
+            <th colspan="2">Description:</th>
+        </tr>
+        <tr>
+            <td colspan="2">@Model.Description</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">
+                <div class="d-flex justify-content-center">
+                    <div class="w-50">
+                        <form asp-controller="Book" asp-action="Review" method="get" class="text-center">
+                            <input type="hidden" name="id" value="@Model.BookId" />
+                            <input type="hidden" name="slug" value="@Model.Slug" />
+                            <button type="submit" class="btn btn-primary w-80">Review Book Rating</button>
+                        </form>
+                    </div>
+                    <div class="w-50">
+                        <form asp-controller="Favorites" asp-action="Add" method="post" class="text-center">
+                            <input type="hidden" name="id" value="@Model.BookId" />
+                            <button type="submit" class="btn btn-primary w-80">Add to Favorites</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

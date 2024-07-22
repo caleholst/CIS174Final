@@ -1,4 +1,5 @@
 ﻿@model List<CIS174Final.Models.Book>
+
 @{
     ViewData["Title"] = "Books";
 }
@@ -13,45 +14,8 @@
         <li><a class="dropdown-item" asp-controller="Book" asp-action="Books" asp-route-sortOrder="highest">Highest Reviewed</a></li>
     </ul>
 </div>
+
 @foreach (var book in Model)
 {
-    <table class="table table-bordered table-striped mb-4">
-        <tbody>
-            <tr>
-                <th>Title</th>
-                <td>@book.Title</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>@book.Author</td>
-            </tr>
-            <tr>
-                <th>Publish Year</th>
-                <td>@book.PublishYear</td>
-            </tr>
-            <tr>
-                <th>Rating</th>
-                <td>@book.Rating</td>
-            </tr>
-            <tr>
-                <th>Description:</th>
-                <td>@book.Description</td>
-            </tr>
-            <tr>
-                <td colspan="2" class="text-center">
-                    <div class="d-flex justify-content-center">
-                        <div class="w-50">
-                            <a asp-controller="Book" asp-action="Review" asp-route-id="@book.BookId" asp-route-slug="@book.Slug">Review Book Rating</a>
-                        </div>
-                        <div class="w-50">
-                            <form asp-controller="Favorites" asp-action="Add" method="post">
-                                <input type="hidden" name="id" value="@book.BookId" />
-                                <button type="submit" class="btn btn-primary">Add to Favorites</button>
-                            </form>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    @await Html.PartialAsync("_BookTableRow", book)
 }

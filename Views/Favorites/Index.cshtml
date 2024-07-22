@@ -43,7 +43,9 @@ else
     </div>
 }
 
-<a asp-action="Index" asp-controller="Home">Return to Home Page</a>
-<form asp-action="Remove" asp-controller="Favorites" method="post">
-    <button type="submit">Clear Favorites</button>
-</form>
+<div class="d-flex mb-4">
+    <a asp-action="Index" asp-controller="Home" class="btn btn-primary me-2">Return to Home Page</a>
+    <form asp-action="Remove" asp-controller="Favorites" method="post" class="mb-0">
+        <button type="submit" class="btn btn-primary">Clear Favorites</button>
+    </form>
+</div>
