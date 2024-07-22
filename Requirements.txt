@@ -2,7 +2,7 @@
 
 (150 pts)Final project: Features, functionality, user experience, code style, and coding syntax. 
 
-(10) Proper routing techniques, route templates for website and attribute routing for web api. 
+(10) Proper routing techniques, route templates for website and attribute routing for web api.  - DONE
 
 (20) Using binding models and validating all user input in a logical manner to give the users a good experience and keep your application safe. - DONE
 
@@ -11,7 +11,7 @@
 (20) Create and utilize a SQL Server database using at least one data context and entity framework core to access the database. Do all your database interactions in services. - DONE
 You should have examples of creates, reads, updates, and deletes - DONE
 
-(10) Use MVC filters to clean up your code and remove code redundancy. You should not have repetitious code in the controllers/actions.
+(10) Use MVC filters to clean up your code and remove code redundancy. You should not have repetitious code in the controllers/actions. - DONE 
 
 (10) You should use user accounts, registration, login all using Identity.
 
