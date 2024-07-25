@@ -5,7 +5,6 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CIS174Final", "CIS174Final.csproj", "{6319F8F5-D635-4C8C-867B-74A0798247B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIS174FinalTest", "..\CIS174FinalTests\CIS174FinalTest\CIS174FinalTest.csproj", "{820B8FEB-76E9-4028-AF59-57E98A0B5FB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
