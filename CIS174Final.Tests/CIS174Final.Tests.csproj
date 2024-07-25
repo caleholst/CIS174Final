@@ -26,4 +26,8 @@
     <ProjectReference Include="..\CIS174Final.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
 </Project>
