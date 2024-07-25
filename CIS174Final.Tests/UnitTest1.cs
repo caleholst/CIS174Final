@@ -1,11 +1,11 @@
-namespace CIS174Final.Tests
-{
-    public class UnitTest1
-    {
-        [Fact]
-        public void Test1()
-        {
+namespace CIS174Final.Tests;
+using Xunit;
 
-        }
+public class UnitTest1
+{
+    [Fact]
+    public void Test1()
+    {
+
     }
 }
