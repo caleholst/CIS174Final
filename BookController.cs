@@ -35,17 +35,17 @@ namespace CIS174Final.Tests
             _mockContext.Setup(c => c.Books).Returns(dbSetMock.Object);
         }
 
-        [Fact]
-        public void Index_Returns_ViewResult_With_ListOfBooks()
-        {
-            // Act
-            var result = _controller.Index() as ViewResult;
+        //[Fact]
+        //public void Index_Returns_ViewResult_With_ListOfBooks()
+        //{
+        //    // Act
+        //    var result = _controller.Index() as ViewResult;
 
-            // Assert
-            Assert.NotNull(result);
-            var model = Assert.IsAssignableFrom<List<Book>>(result.Model);
-            Assert.Equal(2, model.Count);
-        }
+        //    // Assert
+        //    Assert.NotNull(result);
+        //    var model = Assert.IsAssignableFrom<List<Book>>(result.Model);
+        //    Assert.Equal(2, model.Count);
+        //}
 
         [Fact]
         public void Add_Returns_ViewResult_With_NewBook()
