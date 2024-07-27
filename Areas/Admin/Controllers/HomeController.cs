@@ -1,48 +1,44 @@
-﻿using CIS174Final.Models;
+using CIS174Final.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace CIS174Final.Areas.Admin.Controllers;
-[Area("Admin")]
-public class HomeController : Controller
+namespace CIS174Final.Areas.Admin.Controllers
 {
-    private BookContext context { get; set; }
-
-    public HomeController(BookContext ctx) => context = ctx;
-
-    private bool IsAdmin()
+    [Area("Admin")]
+    public class HomeController : Controller
     {
-        return HttpContext.Session.GetString("IsAdmin") == "true";
-    }
+        private BookContext context { get; set; }
 
-    private IActionResult RedirectToLogin()
-    {
-        return RedirectAction("Login, "Home", new { area = ""});
-    )
+        public HomeController(BookContext ctx)
+        {
+            context = ctx;
+        }
 
-    public IActionResult Index()
-    {
-        if (!isIAdmin()) return RedirectToLogin();
+        private bool IsAdmin()
+        {
+            return HttpContext.Session.GetString("IsAdmin") == "true";
+        }
 
-        var books = context.Books.ToList();
-        return View(books);
-    }
+        private IActionResult RedirectToLogin()
+        {
+            return RedirectToAction("Login", "Home", new { area = "" });
+        }
 
-    public IActionResult Index()
-    {
-        if (!IsAdmin()) return RedirectToLogin();
+        public IActionResult Index()
+        {
+            if (!IsAdmin()) return RedirectToLogin();
 
-        var books = context.Books.ToList();
-        return View(books);
-    }
+            var books = context.Books.ToList();
+            return View(books);
+        }
 
-    public IActionResult Books()
-    {
-        if (!IsAdmin()) return RedirectToLogin();
-        
-        var books = context.Books.ToList();
-        return View(books);
+        public IActionResult Books()
+        {
+            if (!IsAdmin()) return RedirectToLogin();
+            
+            var books = context.Books.ToList();
+            return View(books);
         }
     }
 }
