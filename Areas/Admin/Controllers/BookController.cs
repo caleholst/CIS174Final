@@ -10,6 +10,16 @@ namespace CIS174Final.Areas.Admin.Controllers
 
         public BookController(BookContext ctx) => context = ctx;
 
+        private bool IsAdmin()
+        {
+            return HttpContext.Session.GetString("IsAdmin") == "true";
+        }
+
+        private IActionResult RedirectToLogin()
+        {
+            return RedirectToAction("Login, "Home", new{area = ""});
+        }
+
         [HttpGet]
         public IActionResult Add()
         {
