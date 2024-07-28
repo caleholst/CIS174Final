@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using CIS174Final.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -9,7 +9,10 @@ namespace CIS174Final.Controllers
     {
         private BookContext context { get; set; }
 
-        public BookController(BookContext ctx) => context = ctx;
+        public BookController(BookContext ctx)
+        {
+            context = ctx;
+        }
 
         [HttpGet]
         public IActionResult Add()
@@ -36,9 +39,13 @@ namespace CIS174Final.Controllers
             if (ModelState.IsValid)
             {
                 if (book.BookId == 0)
+                {
                     context.Books.Add(book);
+                }
                 else
+                {
                     context.Books.Update(book);
+                }
                 context.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
@@ -124,7 +131,7 @@ namespace CIS174Final.Controllers
             }
 
             var books = booksQuery.ToList();
-            return View("~/Views/Home/Books.cshtml", books); // It wasnt working without doing the specific route. 
+            return View("~/Views/Home/Books.cshtml", books); // It wasn't working without doing the specific route. 
         }
     }
 }

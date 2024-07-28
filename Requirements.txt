@@ -27,3 +27,4 @@ I am expecting 100% coverage on your business logic since your sites are relativ
 
 (20) Azure works - DONE 
 
+Test

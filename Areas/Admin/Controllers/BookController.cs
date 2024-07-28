@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CIS174Final.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace CIS174Final.Areas.Admin.Controllers
 {
@@ -14,10 +15,21 @@ namespace CIS174Final.Areas.Admin.Controllers
         {
             context = ctx;
         }
+        private bool IsAdmin()
+        {
+            return HttpContext.Session.GetString("IsAdmin") == "true";
+        }
+
+        private IActionResult RedirectToLogin()
+        {
+            return RedirectToAction("Login", "Home", new { area = "" });
+        }
 
         [HttpGet]
         public IActionResult Add()
         {
+            if (!IsAdmin()) return RedirectToLogin();
+
             ViewBag.Action = "Add";
             return View("Edit", new Book());
         }
@@ -25,6 +37,10 @@ namespace CIS174Final.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+
+            if (!IsAdmin()) return RedirectToLogin();
+
+            ViewBag.Action = "Edit";
             var book = context.Books.Find(id);
             if (book == null)
             {
@@ -37,6 +53,8 @@ namespace CIS174Final.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Book book)
         {
+            if (!IsAdmin()) return RedirectToLogin();
+
             if (ModelState.IsValid)
             {
                 if (book.BookId == 0)
@@ -57,6 +75,8 @@ namespace CIS174Final.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            if (!IsAdmin()) return RedirectToLogin();
+
             var book = context.Books.Find(id);
             if (book == null)
             {
@@ -68,6 +88,8 @@ namespace CIS174Final.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(Book book)
         {
+            if (!IsAdmin()) return RedirectToLogin();
+
             context.Books.Remove(book);
             context.SaveChanges();
             return RedirectToAction("Index", "Home");
