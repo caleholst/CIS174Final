@@ -1,25 +1,24 @@
-﻿using CIS174Final.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using CIS174Final.Models;
 
-namespace CIS174Final.Areas.Admin.Controllers;
-[Area("Admin")]
-public class HomeController : Controller
+namespace CIS174Final.Areas.Admin.Controllers
 {
-    private BookContext context { get; set; }
-
-    public HomeController(BookContext ctx) => context = ctx;
-
-    public IActionResult Index()
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
+    public class HomeController : Controller
     {
-        var books = context.Books.ToList();
-        return View(books);
-    }
+        private readonly BookContext context;
 
-    public IActionResult Books()
-    {
-        var books = context.Books.ToList();
-        return View(books);
+        public HomeController(BookContext ctx)
+        {
+            context = ctx;
+        }
+
+        public IActionResult Index()
+        {
+            var books = context.Books.ToList();
+            return View(books);
+        }
     }
 }
