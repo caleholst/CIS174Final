@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using CIS174Final.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace CIS174Final.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]  // Restrict access to admin role
     public class BookController : Controller
     {
         private BookContext context { get; set; }
@@ -13,7 +15,6 @@ namespace CIS174Final.Areas.Admin.Controllers
         {
             context = ctx;
         }
-
         private bool IsAdmin()
         {
             return HttpContext.Session.GetString("IsAdmin") == "true";
@@ -36,6 +37,7 @@ namespace CIS174Final.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+
             if (!IsAdmin()) return RedirectToLogin();
 
             ViewBag.Action = "Edit";
@@ -44,6 +46,7 @@ namespace CIS174Final.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Action = "Edit";
             return View(book);
         }
 
