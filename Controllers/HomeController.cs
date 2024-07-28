@@ -1,46 +1,50 @@
-using CIS174Final.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using CIS174Final.Models;
 using System.Diagnostics;
 
 namespace CIS174Final.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BookContext context;
+        private readonly BookContext _context;
 
-        public HomeController(BookContext ctx) => context = ctx;
+        public HomeController(BookContext ctx)
+        {
+            _context = ctx;
+        }
 
         public IActionResult Index()
         {
-            var books = context.Books.ToList();
+            var books = _context.Books.ToList();
             return View(books);
         }
 
         public IActionResult Books()
         {
-            var books = context.Books.ToList();
+            var books = _context.Books.ToList();
             return View(books);
         }
 
         public IActionResult Login()
         {
-            return view();
+            return View();
         }
 
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            //making this simple for our use only, if need be you can make changes :)
+            // Simple password for us to have
             const string adminUsername = "admin";
-            const string adminPassowrd = "password";
+            const string adminPassword = "password";
 
             if (username == adminUsername && password == adminPassword)
             {
                 HttpContext.Session.SetString("IsAdmin", "true");
-                return RedirectToAction("Index", "Home", new { area = "Admin"});
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
 
-            Viewbag.Error = "Invalid username or password
+            ViewBag.Error = "Invalid username or password";
             return View();
         }
 
