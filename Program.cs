@@ -1,23 +1,21 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CIS174Final.Models;
-using CIS174Final.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(options =>
-{
-    options.Filters.Add<GlobalExceptionFilter>();
-});
+builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 
-builder.Services.AddDbContext<BookContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BookContext")));
+builder.Services.AddDbContext<BookContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BookContext")));
 
-builder.Services.AddRouting(options =>
-{
-    options.LowercaseUrls = true;
-    options.AppendTrailingSlash = true;
-});
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()  // Add roles
+    .AddEntityFrameworkStores<BookContext>();
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -25,7 +23,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -34,35 +31,46 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 
-app.MapControllerRoute(
-    name: "book_add",
-    pattern: "api/book/add",
-    defaults: new { controller = "Book", action = "Add" }
-);
+app.MapRazorPages();
 
 app.MapControllerRoute(
-    name: "book_review",
-    pattern: "api/book/review/{id?}",
-    defaults: new { controller = "Book", action = "Review" }
-);
-
-app.MapControllerRoute(
-    name: "book_list",
-    pattern: "api/book/books",
-    defaults: new { controller = "Book", action = "Books" }
-);
-
-app.MapAreaControllerRoute(
-    name: "admin",
-    areaName: "Admin",
-    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
-
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Initialize roles and admin user
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    }
+
+
+    var adminEmail = "admin@example.com";
+    var adminUser = await userManager.FindByEmailAsync(adminEmail);
+    if (adminUser == null)
+    {
+        adminUser = new ApplicationUser
+        {
+            UserName = adminEmail,
+            Email = adminEmail,
+            EmailConfirmed = true
+        };
+        await userManager.CreateAsync(adminUser, "AdminPassword123!");  // Change the password as needed, if you don't like this.
+        await userManager.AddToRoleAsync(adminUser, "Admin");
+    }
+}
 
 app.Run();
