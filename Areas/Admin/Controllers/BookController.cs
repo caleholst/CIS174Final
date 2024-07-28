@@ -15,7 +15,7 @@ namespace CIS174Final.Areas.Admin.Controllers
         {
             context = ctx;
         }
-
+        
         [HttpGet]
         public IActionResult Add()
         {
